@@ -55,28 +55,31 @@
   # };
 
   outputs = inputs@{ self,
-      nixpkgs, nix, flake-utils, flake-parts, flakeforge, home-manager,
-      nix-alien, nix-ld, nur, ... }:
+      nixpkgs, nix, flake-utils, flake-parts, flakeforge, home-manager, nur,
+      nix-alien, nix-ld, ... }:
      let
   	  # overlays = [ (import rust-overlay) ];
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
      inherit (nixpkgs) lib;
-     # fhs = pkgs.buildFHSUserEnv
   	 rustVersion = pkgs.rust-bin.stable.latest.default;
      # Expose overlay to flake outputs, to allow using it from other flakes.
      # Flake inputs are passed to the overlay so that the packages defined in it can use the sources pinned in flake.lock
      # overlays.default = final: prev: (import ./nix/overlays inputs) final prev;
-     nix-alien-pkgs = import (
-       builtins.fetchTarball "https://github.com/thiagokokada/nix-alien/tarball/master"
-     ) { };
-
      in {
       nixosConfigurations.aspire = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit self; };
         # extraSpecialArgs = { inherit inputs;};
         modules = [
+          { nixpkgs.overlays = [ nur.overlay ]; }
+          ({ pkgs, ... }: let
+            nur-no-pkgs = import nur {
+              nurpkgs = import nixpkgs { inherit system; };
+            }; in {
+              imports = with nur-no-pkgs; [ repos.iopq.modules.xraya ];
+              services.xraya.enable = false;
+            })
           ./configuration.nix
         ];
       };
@@ -89,7 +92,7 @@
         (builtins.attrNames (builtins.readDir ./modules)));
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-      devShellspkgs.mkShell = {
+      devShells.pkgs.mkShell = {
         name = "pydev";
         packages = [
           (pkgs.python3.withPackages (python-pkgs: with python-pkgs; [

@@ -27,15 +27,23 @@
    # xorgPkgs = pkgs.xorg.withPackages ()
  in {
    fonts.packages = with pkgs; [
-     liberation_ttf dejavu_fonts terminus_font ubuntu_font_family vistafonts
-     libertine gyre-fonts
+     liberation_ttf
+     libertine dejavu_fonts gyre-fonts
+     terminus_font ubuntu_font_family vistafonts
 
-   # (nerdfonts.override { fonts = ["FontAwesome"]; })
+     # From Nerdfonts
+     (nerdfonts.override { fonts = [
+       "JetBrainsMono" "DroidSansMono"
+     ]; })
+     fira-code fira-code-symbols
 
-   # FIXME: ra-code fira-code-symbols
-     noto-fonts-cjk
-     behdad-fonts
-   ];
+     noto-fonts-cjk noto-fonts-emoji
+     mplus-outline-fonts.githubRelease
+
+     # Foreign
+     kanit-font sarabun-font tlwg
+
+  ];
 
    environment.systemPackages = with pkgs; [
     # Wayland

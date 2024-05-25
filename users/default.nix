@@ -9,11 +9,10 @@
         "wheel" "audio" "video" "plugdev" "input" "networkmanager" "docker" "adbusers" "scanner" "lp"
       ];
       hashedPassword = "$y$j9T$4GUrcjM44bcpGFbP8UzyP/$NlZ26azF0ekWBxNVaAxXBzE63i52/ZkumDAcj0DLSh/";
-      # hashedPassword = "c553fe2a74ca1eee3ac9684969cf82523df56b89cb02e059a8eac81ae5e15693";
-      shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgn3R6ycFi5zl/fVZDK/LtzY48IriP0aJ9UlZSp2Rlj attachments.bazaar@erine.email"
       ];
+      shell = pkgs.zsh;
       isNormalUser = true;
       createHome = true;
       # description = "";
@@ -53,19 +52,16 @@
     manual.manpages.enable = false;
 
     home.packages = with pkgs; [
-      # Window managers
       xmonad-with-packages xmobar trayer
       bspwm awesome
-      sxhkd libnotify conky
-      greetd.greetd
-      imagemagick
+
+      sxhkd libnotify greetd.greetd
+      conky
+
       font-awesome
-
-
 
       cups system-config-printer hplip xsane
       qpdf poppler_utils
-      claws-mail
 
       # Media
       celluloid tenacity flowblade
@@ -77,16 +73,30 @@
       blender inkscape krita
       prusa-slicer
       fontforge-gtk
+
+      # Wayland
       wlroots wlrctl
       wayshot waybar wmenu yofi
       dmenu-wayland rofi-wayland
+      anki-bin
+      breeze-icons
+      adwaita-qt
 
       nomacs
       wxhexeditor hexd
 
-      vivaldi vivaldi-ffmpeg-codecs
-      tor-browser
 
+      # Games
+      opendungeons
+      cataclysm-dda
+      dwarf-fortress
+
+      lutris protontricks protonup-qt
+      heroic legendary-gl
+      steam steamPackages.steam-runtime steamcmd steam-run
+
+
+      vivaldi vivaldi-ffmpeg-codecs
       qutebrowser luakit nyxt
 
       timeshift
@@ -98,7 +108,7 @@
       copyq
 
       obs-studio
-      webcamoid droidcam v4l-utils
+      droidcam v4l-utils webcamoid
       aegisub
 
       emacs29-gtk3 cask
@@ -111,42 +121,32 @@
       electrum feather monero zecwallet-lite
       qbittorrent
       yt-dlp
+
       # Tezos
       ligo tezos-rust-libs
-
-      appimage-run appimagekit
 
       keepmenu kpcli keepassxc
       veracrypt
 
-      anki-bin
-      breeze-icons
-      adwaita-qt
+      appimage-run appimagekit
+
 
       # Messengers
       gajim
-      weechat
-      weechatScripts.weechat-matrix
 
       nheko
       telegram-desktop
       simplex-chat-desktop
       element-desktop
 
-      # AI
       ollama
-
 
       # Emulators
       rpcs3 pcsx2 pcsxr ppsspp-sdl
       mednafen mednaffe mupen64plus
-      ryujinx # replace to suyu
+      ryujinx # suyu replaced
       xemu
-
-      lutris protontricks protonup-qt
-      # Proprietary adware shit. Remove as possible.
-      heroic legendary-gl
-      steam steamPackages.steam-runtime steamcmd steam-run
+       # Proprietary adware shit. Remove as possible.
       webcord
       zoom-us
 

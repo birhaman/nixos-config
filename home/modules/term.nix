@@ -9,21 +9,58 @@
       nix-your-shell nix-zsh-completions
       tmux tmux-xpanes
 
+      # Binutils spicy als
+      eza dtrx fd bfs xcp broot plocate
+      ydiff dyff dirdiff
+      du-dust dfc
+      busybox
+
+      zee vis ox
+      yai
+      fasd delta rm-improved lsd massren
+
+      autorestic zbackup
+
+      # Email
       aerc alpine notmuch lumail meli
+      tmpmail
+      bfg-repo-cleaner
+
+      # Messengers
+      pingme
+      scli
+      weechat
+      weechatScripts.weechat-matrix
+
       rtorrent
       ncmpcpp
 
-      nb
-      bartib timetrap
-      haskellPackages.hledger hledger-utils
+      bcal
 
+      haskellPackages.hledger hledger-utils invoice
+      ticker cointop
+
+      nb bartib timetrap
       metar
 
-      ticker
-      cointop
+      # Osint
+      asn
+
+      sops
+
+      # Converters
+      imagemagick
+
+
+      iredis
 
       fastfetch screenfetch
-      blahaj
+      daktilo
+      blahaj nms neo
+      pokemonsay pokeget-rs pokete
+      toilet
+
+
     ];
   };
 
